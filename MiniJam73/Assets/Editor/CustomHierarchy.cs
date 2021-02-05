@@ -13,6 +13,7 @@ public class CustomHierarchy : MonoBehaviour
     public static Color backgroundColorSlash = new Color(0.4901961f, 0.2235294f, 0.2196079f);
     public static Color backgroundColorStars = new Color(0.3882353f, 0.1803922f, 0.1647059f);
     public static Color backgroundColorMinus = new Color(0.2901961f, 0.2431373f, 0.2431373f);
+    public static Color backgroundColorPlus = new Color(0.101961f, 0.131373f, 0.2431373f);
     static CustomHierarchy()
     {
         EditorApplication.hierarchyWindowItemOnGUI += HandleHierarchyWindowItemOnGUI;
@@ -51,6 +52,11 @@ public class CustomHierarchy : MonoBehaviour
                 else if(obj.name.Remove(2) == "--") 
                 {
                     ColorBackground = backgroundColorMinus;
+                    SetColorData(ColorBackground, selectionRect, obj.name);
+                }
+                else if(obj.name.Remove(2) == "++") 
+                {
+                    ColorBackground = backgroundColorPlus;
                     SetColorData(ColorBackground, selectionRect, obj.name);
                 }
             }

@@ -11,6 +11,7 @@ public class HierarchyEditor : EditorWindow
     {
         CustomHierarchy.backgroundColorSlash = EditorGUILayout.ColorField("// Color", CustomHierarchy.backgroundColorSlash);
         CustomHierarchy.backgroundColorStars = EditorGUILayout.ColorField("** Color", CustomHierarchy.backgroundColorStars);
+        CustomHierarchy.backgroundColorPlus = EditorGUILayout.ColorField("++ Color", CustomHierarchy.backgroundColorPlus);
         CustomHierarchy.backgroundColorMinus = EditorGUILayout.ColorField("-- Color", CustomHierarchy.backgroundColorMinus);
         CustomHierarchy.FontColorDefault = EditorGUILayout.ColorField("FontDefault Color", CustomHierarchy.FontColorDefault);
         CustomHierarchy.FontColorInvisibl = EditorGUILayout.ColorField("FontInvisibl Color", CustomHierarchy.FontColorInvisibl);

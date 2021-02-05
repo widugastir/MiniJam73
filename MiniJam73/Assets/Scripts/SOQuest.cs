@@ -1,20 +1,21 @@
 using UnityEngine;
-using UnityEngine.UI;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "New quest", menuName = "Quest", order = 51)]
 public class SOQuest : ScriptableObject
 {
     public TypeQuestResource TypeQuestResource;
     public string NameEvent;
-    [Header("Description")]
+    [Header("-Description-")]
     [Space]
-    [TextArea()]
-    public string [] LevelOne = new string[3];
-    [TextArea()]
-    public string [] LevelTwo = new string[2];
+    [TextArea()] public string [] LevelOne = new string[5];
+    public List<QuestOption> QuestOptions;
+    [TextArea()] public string [] ButtonText;
     [Space]
+    [Header("-Dises-")]
     [Range(1, 6)]
-    public int [] DiseCheck;
+    public int [] DiceCheck;
+
 }
 public enum TypeQuestResource
 {
@@ -23,3 +24,4 @@ public enum TypeQuestResource
     Minions
     
 }
+
