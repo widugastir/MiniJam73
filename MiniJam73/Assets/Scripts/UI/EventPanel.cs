@@ -1,18 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EventPanel : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [HideInInspector] public Marker SelectedMarker;
 
-    // Update is called once per frame
-    void Update()
+    #region Временная конструкция
+    public void PressButton1(MapEntity entity)
     {
-        
+        entity.MoveTo(SelectedMarker);
     }
+    #endregion
 }
