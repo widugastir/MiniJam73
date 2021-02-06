@@ -21,7 +21,6 @@ public class MapEntity : MonoBehaviour
 
     private List<GameObject> _path = new List<GameObject>();
     private Marker _moveTarget;
-    public int DiceCount;
     private Vector3 direction;
 
     public void MoveTo(Marker marker)
