@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class FightPanel : MonoBehaviour
 {   
-    //[Header("Settings")]
-
     [Header("Referenes")]
     [SerializeField] private GraphicRaycaster _raycaster;
     [SerializeField] private GameObject _fightPanel;
@@ -22,6 +20,7 @@ public class FightPanel : MonoBehaviour
     [SerializeField] private List<Dice> _enemyDices;
 
     private List<Dice> _enemyActiveDices = new List<Dice>();
+    private List<Dice> _enemyBestDices = new List<Dice>();
     private List<Dice> _playerActiveDices = new List<Dice>();
 
     public static System.Action<int> OnFightEnd;
@@ -34,6 +33,8 @@ public class FightPanel : MonoBehaviour
 
     private Dice _playerDice;
     private Dice _enemyDice;
+
+    private MapEntity _minion;
 
     private void OnEnable()
     {
@@ -49,10 +50,17 @@ public class FightPanel : MonoBehaviour
 
     public void StartFight(MapEntity entity, Marker marker)
     {
+        Time.timeScale = 0f;
         _playerLayourtGroup.enabled = true;
         _fightPanel.SetActive(true);
         _reward = marker.StarCounter;
+        _minion = entity;
         readyToPlace = true;
+        _playerScore = 0;
+        _enemyScore = 0;
+        _enemyBestDices.Clear();
+        _playerVictoryPoints.text = "" + _playerScore;
+        _enemyVictoryPoints.text = "" + _enemyScore;
 
         //Init player dices
         _playerActiveDices.Clear();
@@ -74,18 +82,41 @@ public class FightPanel : MonoBehaviour
             if (i < marker.StarCounter * 2)
             {
                 _enemyDices[i].gameObject.SetActive(true);
+                _enemyDices[i].Roll();
                 _enemyActiveDices.Add(_enemyDices[i]);
             }
         }
+        _enemyBestDices = _enemyActiveDices;
+        if (_enemyBestDices.Count > _playerActiveDices.Count)
+        {
+            _enemyBestDices.Sort(SortDices);
+            _enemyBestDices.RemoveRange(_playerActiveDices.Count, (_enemyBestDices.Count - _playerActiveDices.Count));
+        }
+    }
+
+    private int SortDices(Dice d1, Dice d2)
+    {
+        if(d1.Value < d2.Value)
+        {
+            return 1;
+        }
+        else if (d1.Value > d2.Value)
+        {
+            return -1;
+        }
+        return 0;
     }
 
     public void EndFight()
     {
         _fightPanel.SetActive(false);
-        if (_playerScore < _enemyScore)
+        if (_playerScore <= _enemyScore)
             _reward = 0;
         OnFightEnd?.Invoke(_reward);
         print(_reward);
+        Time.timeScale = 1f;
+
+        _minion.DiceCount = _playerActiveDices.Count / 2;
     }
 
     private void CompareDices()
@@ -123,23 +154,25 @@ public class FightPanel : MonoBehaviour
             {
                 _playerDice = dice;
                 _playerDice.transform.position = r.gameObject.transform.position;
+
                 _playerActiveDices.Remove(_playerDice);
-                Dice enemyDice = _enemyActiveDices[Random.Range(0, _enemyActiveDices.Count)];
+                Dice enemyDice = _enemyBestDices[Random.Range(0, _enemyBestDices.Count)];
                 _enemyDice = enemyDice;
-                _enemyActiveDices.Remove(_enemyDice);
+                _enemyBestDices.Remove(_enemyDice);
                 enemyDice.transform.position = _enemyCubePos.position;
                 enemyDice.SetImageByValue();
                 CompareDices();
 
                 readyToPlace = false;
-                Invoke(nameof(HideDices), 1f);
+                StartCoroutine(HideDices());
                 break;
             }
         }
     }
 
-    private void HideDices()
+    private System.Collections.IEnumerator HideDices()
     {
+        yield return new WaitForSecondsRealtime(1f);
         _playerDice.Disable();
         _enemyDice.Disable();
         readyToPlace = true;

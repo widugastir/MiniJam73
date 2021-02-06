@@ -17,7 +17,6 @@ public class Dice : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         _image = GetComponent<Image>();
         if (_playerOwner == false)
         {
-            Value = DiceController.RollD6();
             GetComponent<Button>().interactable = false;
         }
     }
@@ -29,13 +28,13 @@ public class Dice : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         _image.sprite = _defaultSprite;
     }
 
-    public void Roll()
+    public void Roll(bool updateSprite = true)
     {
-        if (_playerOwner == false) return;
         if (Value == -1)
         {
             Value = DiceController.RollD6();
-            SetImageByValue();
+            if(updateSprite)
+                SetImageByValue();
         }
     }
 
@@ -47,7 +46,12 @@ public class Dice : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     public void SetImageByValue()
     {
-        _image.sprite = _spritesValue[Value - 1];
+        if(_image == null)
+            _image = GetComponent<Image>();
+        if (Value != -1)
+            _image.sprite = _spritesValue[Value - 1];
+        else
+            _image.sprite = _defaultSprite;
     }
 
     public void OnDrag(PointerEventData eventData)
