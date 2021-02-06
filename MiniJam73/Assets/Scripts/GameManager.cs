@@ -9,9 +9,7 @@ public class GameManager : MonoBehaviour
 
     public enum ResourceType
     {
-        DarkPower,
-        DungeonPower,
-        Minions
+        Candles
     }
 
     private Dictionary<ResourceType, int> _resources = new Dictionary<ResourceType, int>();
@@ -28,9 +26,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        _resources.Add(ResourceType.DarkPower, 0);
-        _resources.Add(ResourceType.DungeonPower, 0);
-        _resources.Add(ResourceType.Minions, 0);
+        _resources.Add(ResourceType.Candles, 0);
     }
 
     public void AddResource(ResourceType type, int amount)

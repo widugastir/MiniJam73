@@ -22,23 +22,21 @@ public class DepartureMinions : MonoBehaviour
         }
         _getDiceCount = _diceCount;
         _diceCount = 0;
-        var obj = Instantiate(_perfab, _marker.gameObject.transform.position, Quaternion.identity, _areaSpawn.transform);
-        var me = obj.GetComponent<MapEntity>();
-        me.DiceCount = _getDiceCount;
-        me.CurrentMarker = _marker;
-        SelectionMinions.Instance.PullEntity.Add(obj);
-        SelectionMinions.Instance.SetHighlighted(obj);
-
-
+        var entityObject = Instantiate(_perfab, _marker.gameObject.transform.position, Quaternion.identity, _areaSpawn.transform);
+        var entity = entityObject.GetComponent<MapEntity>();
+        entity.DiceCount = _getDiceCount;
+        entity.CurrentMarker = _marker;
+        SelectionMinions.Instance.PullEntity.Add(entityObject);
+        SelectionMinions.Instance.SetHighlighted(entityObject);
 
         //SelectionMinions.ItWasHighlighted?.Invoke(me, obj.GetComponent<Image>());
 
-        obj.AddComponent<Button>().onClick.AddListener(
+        entityObject.AddComponent<Button>().onClick.AddListener(
             delegate 
             { 
-                SelectionMinions.Instance.SetHighlighted(obj); 
+                SelectionMinions.Instance.SetHighlighted(entityObject); 
             });
-        me._pathChunksParent = _pathChunksParent;
+        entity._pathChunksParent = _pathChunksParent;
 
     }
     public void GetDicePower (bool get)

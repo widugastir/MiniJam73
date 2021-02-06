@@ -122,6 +122,7 @@ public class FightPanel : MonoBehaviour
         {
             _marker.StarCounter = 0;
         }
+        _minion.Candles += _reward;
         _minion.DiceCount = _playerActiveDices.Count / 2;
         if(_minion.DiceCount == 0)
         {
