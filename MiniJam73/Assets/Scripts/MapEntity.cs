@@ -13,6 +13,8 @@ public class MapEntity : MonoBehaviour
     [SerializeField] private GameObject _pathChunkPrefab;
     [SerializeField] private Transform _pathChunksParent;
 
+    public int DiceCount;
+
     public static System.Action<MapEntity, Marker> OnTargetArrived;
 
     private List<GameObject> _path = new List<GameObject>();

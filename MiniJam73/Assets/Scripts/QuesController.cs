@@ -121,7 +121,7 @@ public sealed class QuesController : MonoBehaviour
     public bool RoolDice (int ckeckValue)
     {
         bool result = false;
-        int value = _diceController.RollD6();
+        int value = DiceController.RollD6();
         if(value >= ckeckValue) result = true;
         return result;
     }
