@@ -11,6 +11,7 @@ public class Dice : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     [HideInInspector] public int Value = -1;
 
     public static System.Action<Dice, PointerEventData> OnDicePlacement;
+    public static System.Action<Dice> OnDiceRoll;
 
     public void Start()
     {
@@ -21,9 +22,13 @@ public class Dice : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         }
     }
 
-    public void Disable()
+    public void Disable(bool disableObject = true)
     {
-        gameObject.SetActive(false);
+        if(_image == null)
+            _image = GetComponent<Image>();
+
+        if(disableObject)
+            gameObject.SetActive(false);
         Value = -1;
         _image.sprite = _defaultSprite;
     }
@@ -35,6 +40,7 @@ public class Dice : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             Value = DiceController.RollD6();
             if(updateSprite)
                 SetImageByValue();
+            OnDiceRoll?.Invoke(this);
         }
     }
 
