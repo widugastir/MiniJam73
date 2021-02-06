@@ -35,6 +35,7 @@ public class FightPanel : MonoBehaviour
     private Dice _enemyDice;
 
     private MapEntity _minion;
+    private Marker _marker;
 
     private void OnEnable()
     {
@@ -50,11 +51,14 @@ public class FightPanel : MonoBehaviour
 
     public void StartFight(MapEntity entity, Marker marker)
     {
+        if (marker.StarCounter == 0)
+            return;
         Time.timeScale = 0f;
+        _marker = marker;
+        _minion = entity;
         _playerLayourtGroup.enabled = true;
         _fightPanel.SetActive(true);
         _reward = marker.StarCounter;
-        _minion = entity;
         readyToPlace = true;
         _playerScore = 0;
         _enemyScore = 0;
@@ -113,10 +117,16 @@ public class FightPanel : MonoBehaviour
         if (_playerScore <= _enemyScore)
             _reward = 0;
         OnFightEnd?.Invoke(_reward);
-        print(_reward);
         Time.timeScale = 1f;
-
+        if(_reward > 0)
+        {
+            _marker.StarCounter = 0;
+        }
         _minion.DiceCount = _playerActiveDices.Count / 2;
+        if(_minion.DiceCount == 0)
+        {
+            _minion.BackHome();
+        }
     }
 
     private void CompareDices()
