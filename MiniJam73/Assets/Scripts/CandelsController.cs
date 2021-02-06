@@ -12,43 +12,41 @@ public class CandelsController : MonoBehaviour
         _candles[0].SetActive(true);
     }
 
-    
-
-    public void ChangeCountCandels (int countPower, bool availabilityDise)
+    public void ChangeCountCandels (int countPower)
     {
-        print(countPower + " res");
-        int counter = 0;
         for (int i = 0; i < _candles.Length; i++)
         {
-            if(_candles[i].activeSelf == false && counter < countPower)
+            if(_candles[i].activeSelf == false && i <= countPower)
             {
                 _candles[i].SetActive(true);
-                counter += 1;
             }
             else if (_candles[i].activeSelf == false)
             {
-                counter = 0;
                 break;
             }
         }
-        for (int i = 0; i < _candles.Length; i++)
-        {
-            if(_candles[i].activeSelf == false)
-            {
-                break;
-            }
-            if(_candles[i].activeSelf == true && i == _candles.Length - 1)
-            {
-                _winPanel.SetActive(true);
-            }
-        }
-        for (int i = 0; i < _candles.Length; i++)
-        {
-            if(_candles[i].activeSelf == true && i == _candles.Length - 4)
-            {
-                _failPanel.SetActive(true);
-            }
-        }
+    }
+
+    private void OnEnable()
+    {
+        GameManager.Instance.OnResourceChange += ChekcCurrentResource;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.OnResourceChange -= ChekcCurrentResource;
+    }
+
+    private void ChekcCurrentResource(GameManager.ResourceType resourceType, int amount)
+    {
+        if(GameManager.Instance.GetResource(GameManager.ResourceType.Candles) < 10 
+        && GameManager.Instance.GetResource(GameManager.ResourceType.Minions) == 0 
+        && GameManager.Instance.GetResource(GameManager.ResourceType.PowerDise) == 10)
+            _failPanel.SetActive(true);
+        if(GameManager.Instance.GetResource(GameManager.ResourceType.Candles) == 10)
+            _winPanel.SetActive(true);
+        if(GameManager.ResourceType.Candles == resourceType) 
+            ChangeCountCandels(GameManager.Instance.GetResource(GameManager.ResourceType.Candles));
     }
 
 }

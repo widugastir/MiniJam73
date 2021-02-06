@@ -17,7 +17,7 @@ public class MapEntity : MonoBehaviour
     public bool Selected = false;
 
     public int DiceCount;
-    public int Candles;
+    public int Candles = 0;
 
     public static System.Action<MapEntity, Marker> OnTargetArrived;
 
@@ -43,6 +43,7 @@ public class MapEntity : MonoBehaviour
     public void Kill()
     {
         SelectionMinions.Instance.PullEntity.Remove(gameObject);
+        GameManager.Instance.AddResource(GameManager.ResourceType.Minions, -1);
         Destroy(gameObject);
     }
 

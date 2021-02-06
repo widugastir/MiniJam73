@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -34,5 +35,13 @@ public class UIManager : MonoBehaviour
             _lastPanel.SetActive(false);
         _lastPanel = panel;
         _lastPanel.SetActive(true);
+    }
+    public void LoadNullLevel()
+    {
+        SceneManager.LoadScene(1);
+    }
+    public void Exit()
+    {
+        Application.Quit();
     }
 }

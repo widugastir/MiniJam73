@@ -5,13 +5,14 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public CandelsController CandelsController;
     public Action<ResourceType, int> OnResourceChange;
     private bool status = true;
 
     public enum ResourceType
     {
-        Candles
+        Candles,
+        Minions,
+        PowerDise
     }
 
     private Dictionary<ResourceType, int> _resources = new Dictionary<ResourceType, int>();
@@ -29,15 +30,23 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         _resources.Add(ResourceType.Candles, 0);
+        _resources.Add(ResourceType.Minions, 0);
+        _resources.Add(ResourceType.PowerDise, 0);
     }
 
     public void AddResource(ResourceType type, int amount)
     {
+        print("Resource = " + type + " count = " + _resources[ResourceType.Candles]);
         if(_resources.ContainsKey(type))
         {
-            CandelsController.ChangeCountCandels(amount, true);
             _resources[type] += amount;
             OnResourceChange?.Invoke(type, amount);
         }
+    }
+    public int GetResource (ResourceType resource)
+    {
+        int amount = 0;
+        amount = _resources[resource];
+        return amount;
     }
 }
