@@ -2,21 +2,24 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 
+
 public class MapEntity : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private Marker _currentMarker;
+    [SerializeField] public Marker CurrentMarker;
 
     [Header("References")]
     [SerializeField] private float _moveSpeed = 1f;
     [SerializeField] private float _pathChunkStep = 0.3f;
     [SerializeField] private GameObject _pathChunkPrefab;
-    [SerializeField] private Transform _pathChunksParent;
+    [HideInInspector] public Transform _pathChunksParent;
+    public bool Selected = false;
 
     public static System.Action<MapEntity, Marker> OnTargetArrived;
 
     private List<GameObject> _path = new List<GameObject>();
     private Marker _moveTarget;
+    public int DiceCount;
     private Vector3 direction;
 
     public void MoveTo(Marker marker)
@@ -24,7 +27,7 @@ public class MapEntity : MonoBehaviour
         if (_moveTarget != null)
             return;
         _moveTarget = marker;
-        direction = Vector3.Normalize(_moveTarget.transform.position - _currentMarker.transform.position);
+        direction = Vector3.Normalize(_moveTarget.transform.position - CurrentMarker.transform.position);
         StartCoroutine(Moving());
     }
 
@@ -42,7 +45,7 @@ public class MapEntity : MonoBehaviour
     private void TargetArrived()
     {
         transform.position = _moveTarget.transform.position;
-        _currentMarker = _moveTarget;
+        CurrentMarker = _moveTarget;
         foreach (var chunk in _path)
             Destroy(chunk);
         _path.Clear();
@@ -55,4 +58,5 @@ public class MapEntity : MonoBehaviour
         GameObject pathChunk = Instantiate(_pathChunkPrefab, transform.position, Quaternion.identity, _pathChunksParent);
         _path.Add(pathChunk);
     }
+    
 }
