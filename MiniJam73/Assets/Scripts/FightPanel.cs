@@ -120,6 +120,7 @@ public class FightPanel : MonoBehaviour
         Time.timeScale = 1f;
         if(_reward > 0)
         {
+            _marker.ChangeStars();
             _marker.StarCounter = 0;
         }
         _minion.Candles += _reward;

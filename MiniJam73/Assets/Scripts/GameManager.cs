@@ -5,7 +5,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    public CandelsController CandelsController;
     public Action<ResourceType, int> OnResourceChange;
+    private bool status = true;
 
     public enum ResourceType
     {
@@ -33,6 +35,7 @@ public class GameManager : MonoBehaviour
     {
         if(_resources.ContainsKey(type))
         {
+            CandelsController.ChangeCountCandels(amount, true);
             _resources[type] += amount;
             OnResourceChange?.Invoke(type, amount);
         }

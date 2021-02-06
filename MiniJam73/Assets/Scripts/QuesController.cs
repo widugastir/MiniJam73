@@ -11,12 +11,12 @@ public sealed class QuesController : MonoBehaviour
     private GameObject _targetPanrl;
     private SOQuest _currentQuest;
     private EventPanel _eventPanel;
-    private QuestOption _lastOption;
+    //private QuestOption _lastOption;
     private DiceController _diceController;
     private int _diceResult;
 
     
-    private void Start()
+    /*private void Start()
     {
         _diceController = GetComponent<DiceController>();
         _eventPanel = _questPanrl.GetComponent<EventPanel>();
@@ -103,7 +103,7 @@ public sealed class QuesController : MonoBehaviour
                             _lastOption = _lastOption.Options[i];
                             Debug.Log("_lastOption.Options[index].Exit");
                         }
-                    }*/
+                    }*//*
                     Debug.Log("Bad");
                     _eventPanel._selectButtons[index].GetComponentInParent<Button>().interactable = false;
                 }
@@ -126,12 +126,12 @@ public sealed class QuesController : MonoBehaviour
         return result;
     }
 
-}
+}*/
 
 /////////////////////////////////////////////////////////////
 
 
-[System.Serializable]
+/*[System.Serializable]
 public struct QuestOption
 {
     public enum Resources
@@ -157,5 +157,5 @@ public struct QuestOption
         D20 = 20,
         D100 = 100
     }
-
+*/
 }

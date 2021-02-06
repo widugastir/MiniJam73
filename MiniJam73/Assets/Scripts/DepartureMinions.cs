@@ -20,6 +20,18 @@ public class DepartureMinions : MonoBehaviour
                 Dices[i].color = new Color(0f, 0f, 0f);
             }
         }
+        for (int i = 0; i < Dices.Length; i++)
+        {
+            if(Dices[i].color != new Color(0f, 0f, 0f))
+            {
+                break;
+            }
+            else if(i == Dices.Length - 1)
+            {
+                GameManager.Instance.CandelsController.ChangeCountCandels(0, false);
+            }
+
+        }
         _getDiceCount = _diceCount;
         _diceCount = 0;
         if(_getDiceCount > 0)
@@ -30,9 +42,6 @@ public class DepartureMinions : MonoBehaviour
             entity.CurrentMarker = _marker;
             SelectionMinions.Instance.PullEntity.Add(entityObject);
             SelectionMinions.Instance.SetHighlighted(entityObject);
-
-            //SelectionMinions.ItWasHighlighted?.Invoke(me, obj.GetComponent<Image>());
-
             entityObject.AddComponent<Button>().onClick.AddListener(
                 delegate 
                 { 
@@ -68,6 +77,5 @@ public class DepartureMinions : MonoBehaviour
                 }
             }
         }
-        
     }
 }

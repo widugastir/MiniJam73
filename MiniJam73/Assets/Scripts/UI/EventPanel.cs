@@ -8,7 +8,7 @@ public class EventPanel : MonoBehaviour
     [SerializeField] private Text _comment;
     [HideInInspector] public Text [] _selectButtons;
 
-    public void SetDataQest(QuestOption questOption, string questName)
+    /*public void SetDataQest(QuestOption questOption, string questName)
     {
         _name.text = questName;
         _comment.text = questOption.Main;
@@ -16,7 +16,7 @@ public class EventPanel : MonoBehaviour
         {
             _selectButtons[i].text = questOption.ButtunName[i];
         }
-    }
+    }*/
 
     public void SetTargetMinion()
     {

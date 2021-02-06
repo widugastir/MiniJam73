@@ -9,7 +9,7 @@ public class SOQuest : ScriptableObject
     [Header("-Description-")]
     [Space]
     [TextArea()] public string [] LevelOne = new string[5];
-    public List<QuestOption> QuestOptions;
+    //public List<QuestOption> QuestOptions;
     [TextArea()] public string [] ButtonText;
     [Space]
     [Header("-Dises-")]
