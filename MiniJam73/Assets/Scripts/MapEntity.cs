@@ -6,7 +6,7 @@ using UnityEngine;
 public class MapEntity : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] public Marker CurrentMarker;
+    public Marker CurrentMarker;
 
     [Header("References")]
     [SerializeField] private float _moveSpeed = 1f;

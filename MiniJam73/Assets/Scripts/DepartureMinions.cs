@@ -10,10 +10,6 @@ public class DepartureMinions : MonoBehaviour
     [SerializeField] private GameObject _areaSpawn;
     [SerializeField] private Transform _pathChunksParent;
     [SerializeField] private Image [] Dices;
-    private void Start()
-    {
-        
-    }
 
     public void Departure()
     {
@@ -30,7 +26,7 @@ public class DepartureMinions : MonoBehaviour
         var me = obj.GetComponent<MapEntity>();
         me.DiceCount = _getDiceCount;
         me.CurrentMarker = _marker;
-        //obj.AddComponent<Button>().onClick.AddListener(() => print ("true"));
+        SelectionMinions.ItWasHighlighted?.Invoke(me, obj.GetComponent<Image>());
         obj.AddComponent<Button>().onClick.AddListener(
             delegate 
             { 

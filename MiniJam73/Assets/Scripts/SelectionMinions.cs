@@ -32,13 +32,14 @@ public class SelectionMinions : MonoBehaviour
         SelectionMinions.ItWasHighlighted -= SetHighlighted;
     }
 
+
     private void SetHighlighted(MapEntity entity, Image image)
     {
         if(entity.Selected == false)
         {
             _entity = entity;
             entity.Selected = true;
-            image.color = new Color(0.8f, 0.8f, 0.8f);
+            image.color = new Color(0.5f, 0.5f, 0.5f);
         }
         else
         {

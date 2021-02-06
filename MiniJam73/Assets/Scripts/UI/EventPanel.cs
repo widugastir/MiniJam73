@@ -8,11 +8,6 @@ public class EventPanel : MonoBehaviour
     [SerializeField] private Text _comment;
     [HideInInspector] public Text [] _selectButtons;
 
-
-    private void Start ()
-    {
-        
-    }
     public void SetDataQest(QuestOption questOption, string questName)
     {
         _name.text = questName;
