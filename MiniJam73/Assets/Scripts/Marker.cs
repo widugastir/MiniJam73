@@ -8,5 +8,7 @@ public class Marker : MonoBehaviour
     {
         panel.SelectedMarker = this;
         panel.gameObject.SetActive(true);
+        SelectionMinions.Instance.TargetMarker = this;
+        print(this + " SetActivePanel");
     }
 }

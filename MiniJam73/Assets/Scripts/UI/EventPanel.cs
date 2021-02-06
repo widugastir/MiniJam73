@@ -23,14 +23,19 @@ public class EventPanel : MonoBehaviour
         }
     }
 
+    public void SetTargetMinion()
+    {
+        
+    }
+
     
 
 
 
-    #region ��������� �����������
+    /*#region ��������� �����������
     public void PressButton1(MapEntity entity)
     {
         entity.MoveTo(SelectedMarker);
     }
-    #endregion
+    #endregion*/
 }
