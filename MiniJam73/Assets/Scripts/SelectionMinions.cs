@@ -1,11 +1,13 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SelectionMinions : MonoBehaviour
 {
     public static SelectionMinions Instance;
-    public static System.Action<MapEntity, Image> ItWasHighlighted;
+    //public static System.Action<MapEntity, Image> ItWasHighlighted;
     public Marker TargetMarker;
+    public List<GameObject> PullEntity;
     private MapEntity _entity;
     private void Awake ()
     {
@@ -15,11 +17,12 @@ public class SelectionMinions : MonoBehaviour
             return;
         }
         Instance = this;
+        PullEntity = new List<GameObject>();
     }
 
-    public void Selected(GameObject obj)
+    /*public void Selected(GameObject obj)
     {
-        ItWasHighlighted?.Invoke(obj.GetComponent<MapEntity>(), obj.GetComponent<Image>());
+        //ItWasHighlighted?.Invoke(obj.GetComponent<MapEntity>(), obj.GetComponent<Image>());
     }
 
     private void OnEnable()
@@ -46,11 +49,34 @@ public class SelectionMinions : MonoBehaviour
             entity.Selected = false;
             image.color = new Color(1f, 1f, 1f);
         }
+    }*/
+
+    public void SetHighlighted(GameObject obj)
+    {
+        foreach(GameObject i in PullEntity)
+        {
+            i.GetComponent<MapEntity>().Selected = false;
+            i.GetComponent<Image>().color = new Color(1f, 1f, 1f);
+            if(i == obj)
+            {
+                print("!!!");
+                i.GetComponent<MapEntity>().Selected = true;
+                i.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);
+            }
+        }
     }
     public void SetTarget ()
     {
         print(TargetMarker + " SetTarget");
         if(TargetMarker != null)
-            _entity.MoveTo(TargetMarker);
+        {
+            foreach(GameObject i in PullEntity)
+            {
+                if(i.GetComponent<MapEntity>().Selected == true)
+                {
+                    i.GetComponent<MapEntity>().MoveTo(TargetMarker);
+                }
+            }
+        }
     }
 }

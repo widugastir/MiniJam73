@@ -26,11 +26,17 @@ public class DepartureMinions : MonoBehaviour
         var me = obj.GetComponent<MapEntity>();
         me.DiceCount = _getDiceCount;
         me.CurrentMarker = _marker;
-        SelectionMinions.ItWasHighlighted?.Invoke(me, obj.GetComponent<Image>());
+        SelectionMinions.Instance.PullEntity.Add(obj);
+        SelectionMinions.Instance.SetHighlighted(obj);
+
+
+
+        //SelectionMinions.ItWasHighlighted?.Invoke(me, obj.GetComponent<Image>());
+
         obj.AddComponent<Button>().onClick.AddListener(
             delegate 
             { 
-                SelectionMinions.Instance.Selected(obj); 
+                SelectionMinions.Instance.SetHighlighted(obj); 
             });
         me._pathChunksParent = _pathChunksParent;
 
