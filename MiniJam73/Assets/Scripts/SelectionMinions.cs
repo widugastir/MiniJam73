@@ -59,7 +59,6 @@ public class SelectionMinions : MonoBehaviour
             i.GetComponent<Image>().color = new Color(1f, 1f, 1f);
             if(i == obj)
             {
-                print("!!!");
                 i.GetComponent<MapEntity>().Selected = true;
                 i.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);
             }
@@ -67,7 +66,6 @@ public class SelectionMinions : MonoBehaviour
     }
     public void SetTarget ()
     {
-        print(TargetMarker + " SetTarget");
         if(TargetMarker != null)
         {
             foreach(GameObject i in PullEntity)
