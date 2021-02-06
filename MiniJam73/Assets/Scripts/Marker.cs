@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class Marker : MonoBehaviour
 {
-    public int StarCounter;
-
+    public int StarCount;
     public void SetActivePanel(EventPanel panel)
     {
         panel.SelectedMarker = this;
