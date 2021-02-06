@@ -2872,7 +2872,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a655de8552208454bac18d382eb270fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CandelsController: {fileID: 1529091272}
 --- !u!1001 &297608205
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3965,7 +3964,7 @@ MonoBehaviour:
   m_Content: {fileID: 2072210795}
   m_Horizontal: 1
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
