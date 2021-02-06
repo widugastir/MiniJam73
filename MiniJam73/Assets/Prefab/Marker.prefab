@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5345377939164701384}
   - component: {fileID: 4888032926287009883}
   - component: {fileID: 6023341030370264345}
+  - component: {fileID: 2024438697839025631}
   m_Layer: 0
   m_Name: Image3
   m_TagString: Untagged
@@ -75,6 +76,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!111 &2024438697839025631
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5631031454602728398}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 38d81164c32fbe949a7223d2e1a3ca46, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 38d81164c32fbe949a7223d2e1a3ca46, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &7846176990595602784
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,6 +103,7 @@ GameObject:
   - component: {fileID: 504126122108902292}
   - component: {fileID: 837383877259768953}
   - component: {fileID: 6779222742008022023}
+  - component: {fileID: 3262812900808656576}
   m_Layer: 0
   m_Name: Image1
   m_TagString: Untagged
@@ -109,7 +127,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 34.9544, y: -47.9544}
+  m_AnchoredPosition: {x: 91.004, y: -47.9544}
   m_SizeDelta: {x: 69.9088, y: 69.9088}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &837383877259768953
@@ -150,6 +168,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!111 &3262812900808656576
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7846176990595602784}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 38d81164c32fbe949a7223d2e1a3ca46, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 38d81164c32fbe949a7223d2e1a3ca46, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &8164192779931870947
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,6 +300,7 @@ GameObject:
   - component: {fileID: 1760214779474108444}
   - component: {fileID: 5935725386502291031}
   - component: {fileID: 4500539335380452860}
+  - component: {fileID: 8651533122961561705}
   m_Layer: 0
   m_Name: Image2
   m_TagString: Untagged
@@ -330,6 +365,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!111 &8651533122961561705
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8441620820932168167}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 38d81164c32fbe949a7223d2e1a3ca46, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 38d81164c32fbe949a7223d2e1a3ca46, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &9190317932897981814
 GameObject:
   m_ObjectHideFlags: 0
