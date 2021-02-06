@@ -27,7 +27,7 @@ public sealed class QuesController : MonoBehaviour
             _currentQuest = quest;
     }
 
-    private void ChengeCurrentQuest(MapEntity entity)
+    private void ChengeCurrentQuest(MapEntity entity, Marker maker)
     {
        _questPanrl.SetActive(true);
        _lastOption = _currentQuest.QuestOptions[0];
@@ -88,7 +88,7 @@ public sealed class QuesController : MonoBehaviour
             }
             if(_lastOption.Options[index].Check)
             {
-                if(RoolDice(_lastOption.Options[index].CheckValue, (int)_lastOption.Options[index].Dice))
+                if(RoolDice(_lastOption.Options[index].CheckValue))
                 {
                     _eventPanel.SetDataQest(_lastOption.Options[index], _currentQuest.NameEvent);
                     _lastOption = _lastOption.Options[index];
@@ -118,10 +118,10 @@ public sealed class QuesController : MonoBehaviour
     }
 #endregion
 
-    public bool RoolDice (int ckeckValue, int maxValue)
+    public bool RoolDice (int ckeckValue)
     {
         bool result = false;
-        int value = _diceController.Result(maxValue);
+        int value = _diceController.RollD6();
         if(value >= ckeckValue) result = true;
         return result;
     }

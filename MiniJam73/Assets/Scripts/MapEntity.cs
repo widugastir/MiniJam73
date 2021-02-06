@@ -13,7 +13,7 @@ public class MapEntity : MonoBehaviour
     [SerializeField] private GameObject _pathChunkPrefab;
     [SerializeField] private Transform _pathChunksParent;
 
-    public static System.Action<MapEntity> OnTargetArrived;
+    public static System.Action<MapEntity, Marker> OnTargetArrived;
 
     private List<GameObject> _path = new List<GameObject>();
     private Marker _moveTarget;
@@ -43,11 +43,11 @@ public class MapEntity : MonoBehaviour
     {
         transform.position = _moveTarget.transform.position;
         _currentMarker = _moveTarget;
-        _moveTarget = null;
         foreach (var chunk in _path)
             Destroy(chunk);
         _path.Clear();
-        OnTargetArrived?.Invoke(this);
+        OnTargetArrived?.Invoke(this, _moveTarget);
+        _moveTarget = null;
     }
 
     private void DrawPath()

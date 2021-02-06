@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DiceController : MonoBehaviour
 {
-    public int Result (int diseMaxValue)
+    public int RollD6 ()
     {
-        int trigger = (int)Random.Range(1, diseMaxValue + 1);
-        return trigger;
+        return Random.Range(1, 7);
     }
 
     
