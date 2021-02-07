@@ -48,6 +48,7 @@ public class Dice : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     {
         if (_playerOwner == false || Value != -1) return;
         Roll();
+        OnDicePlacement?.Invoke(this, eventData);
     }
 
     public void SetImageByValue()

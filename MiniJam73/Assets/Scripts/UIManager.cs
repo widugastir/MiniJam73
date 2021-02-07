@@ -1,10 +1,14 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Inctance;
     [SerializeField] private GameObject _initialPanel;
+    [SerializeField] private GameObject _messagePanel;
+    [SerializeField] private Text _messageText;
+
     private GameObject _lastPanel;
 
     private void Awake() 
@@ -20,6 +24,19 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         EnablePanel(_initialPanel);
+    }
+
+    public void SetMessagePanel(string text)
+    {
+        _messageText.text = text;
+        _messagePanel.SetActive(true);
+        StartCoroutine(DsableMessagePanel());
+    }
+
+    private System.Collections.IEnumerator DsableMessagePanel()
+    {
+        yield return new WaitForSecondsRealtime(3f);
+        _messagePanel.SetActive(false);
     }
 
     public void EnablePanel(GameObject panel, bool closePanel = true)

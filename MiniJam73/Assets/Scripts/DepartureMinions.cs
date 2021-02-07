@@ -6,6 +6,7 @@ public class DepartureMinions : MonoBehaviour
     private int _diceCount;
     private int _getDiceCount;
     [SerializeField] private GameObject _perfab;
+    [SerializeField] private GameObject _map;
     [SerializeField] private Marker _marker;
     [SerializeField] private GameObject _areaSpawn;
     [SerializeField] private Transform _pathChunksParent;
@@ -13,6 +14,11 @@ public class DepartureMinions : MonoBehaviour
 
     public void Departure()
     {
+        if (GameManager.Instance.GetResource(GameManager.ResourceType.Minions) >= 2)
+        {
+            UIManager.Inctance.SetMessagePanel("You can only have two minions at the same time!");
+            return;
+        }
         for (int i = Dices.Length - 1; i >= 0; i--)
         {
             if(Dices[i].color == new Color(0.3f, 0.3f, 0.3f))
@@ -26,7 +32,7 @@ public class DepartureMinions : MonoBehaviour
         _diceCount = 0;
         if(_getDiceCount > 0)
         {
-            var entityObject = Instantiate(_perfab, _marker.gameObject.transform.position, Quaternion.identity, _areaSpawn.transform);
+            var entityObject = Instantiate(_perfab, _marker.gameObject.transform.position + (Vector3)Random.insideUnitCircle * 100f, Quaternion.identity, _areaSpawn.transform);
             var entity = entityObject.GetComponent<MapEntity>();
             entity.DiceCount = _getDiceCount;
             entity.CurrentMarker = _marker;
@@ -38,6 +44,7 @@ public class DepartureMinions : MonoBehaviour
                     SelectionMinions.Instance.SetHighlighted(entityObject); 
                 });
             entity._pathChunksParent = _pathChunksParent;
+            UIManager.Inctance.EnablePanel(_map);
         }
 
     }

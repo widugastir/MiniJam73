@@ -76,7 +76,7 @@ public class MapEntity : MonoBehaviour
 
     private void TargetArrived()
     {
-        transform.position = _moveTarget.transform.position;
+        transform.position = _moveTarget.transform.position + (Vector3)Random.insideUnitCircle * 100f;
         foreach (var chunk in _path)
             Destroy(chunk);
         _path.Clear();
