@@ -6,6 +6,7 @@ public class Marker : MonoBehaviour
     public MarkerBonus BonusLoot;
     public MarkerAbility Ability;
     [SerializeField] private GameObject [] _stars;
+    [SerializeField] private GameObject _starPanel;
 
     public void Start ()
     {
@@ -25,10 +26,9 @@ public class Marker : MonoBehaviour
 
     public void ChangeStars()
     {
-        for(int i = 0; i < _stars.Length; i++)
-        {
-            _stars[i].SetActive(false);
-        }
+        
+        _starPanel.SetActive(false);
+        
     }
 
     public enum MarkerBonus

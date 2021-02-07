@@ -30,7 +30,6 @@ public class DepartureMinions : MonoBehaviour
         }
         
         _getDiceCount = _diceCount;
-        _diceCount = 0;
         if(_getDiceCount > 0)
         {
             var entityObject = Instantiate(_perfab, _marker.gameObject.transform.position + (Vector3)Random.insideUnitCircle * 100f, Quaternion.identity, _areaSpawn.transform);
@@ -48,6 +47,7 @@ public class DepartureMinions : MonoBehaviour
             UIManager.Inctance.EnablePanel(_map);
             GameManager.Instance.AddResource(GameManager.ResourceType.Minions, 1);
             GameManager.Instance.AddResource(GameManager.ResourceType.PowerDise, _diceCount);
+            _diceCount = 0;
         }
 
     }

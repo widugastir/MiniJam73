@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine;
+using TMPro;
+
 
 public class FightPanel : MonoBehaviour
 {   
@@ -11,8 +13,8 @@ public class FightPanel : MonoBehaviour
     [SerializeField] private GameObject _fightPanel;
     [SerializeField] private GameObject _randomDicePanel;
     [SerializeField] private HorizontalLayoutGroup _playerLayourtGroup;
-    [SerializeField] private Text _playerVictoryPoints;
-    [SerializeField] private Text _enemyVictoryPoints;
+    [SerializeField] private TextMeshProUGUI _playerVictoryPoints;
+    [SerializeField] private TextMeshProUGUI _enemyVictoryPoints;
     [SerializeField] private string _cubePosTag = "CubePos";
     [SerializeField] private Transform _enemyCubePos;
     [SerializeField] private Transform _playerCubePos;
@@ -21,10 +23,10 @@ public class FightPanel : MonoBehaviour
     [SerializeField] private List<Dice> _playerDices;
     [SerializeField] private List<Dice> _enemyDices;
     [SerializeField] private Dice _randomDice;
-    [SerializeField] private Text _randomDiceText1;
-    [SerializeField] private Text _randomDiceText2;
-    [SerializeField] private Text _resultText;
-    [SerializeField] private Text _infoText;
+    [SerializeField] private TextMeshProUGUI _randomDiceText1;
+    [SerializeField] private TextMeshProUGUI _randomDiceText2;
+    [SerializeField] private TextMeshProUGUI _resultText;
+    [SerializeField] private TextMeshProUGUI _infoText;
 
     private List<Dice> _enemyActiveDices = new List<Dice>();
     private List<Dice> _enemyBestDices = new List<Dice>();
@@ -221,7 +223,6 @@ public class FightPanel : MonoBehaviour
             ApplyMarkerBonus();
         }
         OnFightEnd?.Invoke(_reward);
-        Time.timeScale = 1f;
         if(_reward > 0)
         {
             _marker.ChangeStars();
@@ -240,6 +241,7 @@ public class FightPanel : MonoBehaviour
     private IEnumerator ClosePanelWithDelay(float delay)
     {
         yield return new WaitForSecondsRealtime(delay);
+        Time.timeScale = 1f;
         _fightPanel.SetActive(false);
     }
 
