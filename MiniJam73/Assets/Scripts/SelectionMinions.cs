@@ -55,12 +55,10 @@ public class SelectionMinions : MonoBehaviour
     {
         foreach(GameObject i in PullEntity)
         {
-            i.GetComponent<MapEntity>().Selected = false;
-            i.GetComponent<Image>().color = new Color(1f, 1f, 1f);
+            i.GetComponent<MapEntity>().SelectedThis(false);
             if(i == obj)
             {
-                i.GetComponent<MapEntity>().Selected = true;
-                i.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f);
+                i.GetComponent<MapEntity>().SelectedThis(true);
             }
         }
     }
@@ -70,7 +68,7 @@ public class SelectionMinions : MonoBehaviour
         {
             foreach(GameObject i in PullEntity)
             {
-                if(i.GetComponent<MapEntity>().Selected == true)
+                if(i.GetComponent<MapEntity>().SelectImage.activeSelf == true)
                 {
                     i.GetComponent<MapEntity>().MoveTo(TargetMarker);
                 }

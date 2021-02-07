@@ -14,7 +14,7 @@ public class MapEntity : MonoBehaviour
     [SerializeField] private float _pathChunkStep = 0.3f;
     [SerializeField] private GameObject _pathChunkPrefab;
     [HideInInspector] public Transform _pathChunksParent;
-    public bool Selected = false;
+    public GameObject SelectImage;
 
     public int DiceCount;
     public int Candles = 0;
@@ -26,6 +26,7 @@ public class MapEntity : MonoBehaviour
     private Marker _moveTarget;
     private Vector3 direction;
     private bool _movingHome;
+    
 
     private void Start()
     {
@@ -45,6 +46,11 @@ public class MapEntity : MonoBehaviour
         SelectionMinions.Instance.PullEntity.Remove(gameObject);
         GameManager.Instance.AddResource(GameManager.ResourceType.Minions, -1);
         Destroy(gameObject);
+    }
+
+    public void SelectedThis(bool select)
+    {
+        SelectImage.SetActive(select);
     }
 
     public void MoveTo(Marker marker)
