@@ -106,6 +106,14 @@ public class FightPanel : MonoBehaviour
         }
     }
 
+    public void RollAllDices()
+    {
+        for (int i = 0; i < _playerActiveDices.Count; i++)
+        {
+            _playerActiveDices[i].Roll();
+        }
+    }
+
     private int SortDices(Dice d1, Dice d2)
     {
         if(d1.Value < d2.Value)
