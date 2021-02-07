@@ -203,7 +203,7 @@ public class FightPanel : MonoBehaviour
         }
         else
         {
-            _resultText.text = $"Vectory:\nCandles + {_reward}";
+            _resultText.text = $"Victory:\nCandles + {_reward}";
         }
         OnFightEnd?.Invoke(_reward);
         Time.timeScale = 1f;
