@@ -7,9 +7,9 @@ public class Dice : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     [SerializeField] private Sprite[] _spritesValue;
     [SerializeField] private Sprite _defaultSprite;
     [SerializeField] private bool _playerOwner = false;
+    [HideInInspector] public int Value = -1;
     private Image _image;
     private Animator _animator;
-    [HideInInspector] public int Value = -1;
 
     public static System.Action<Dice, PointerEventData> OnDicePlacement;
     public static System.Action<Dice> OnDiceRoll;
@@ -43,6 +43,7 @@ public class Dice : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             if(updateSprite)
                 SetImageByValue();
             OnDiceRoll?.Invoke(this);
+            MusicManager.Instance.PlaySound(2);
         }
     }
 
@@ -55,6 +56,7 @@ public class Dice : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
             Value = DiceController.RollD6();
             _animator.SetTrigger("Roll");
             OnDiceRoll?.Invoke(this);
+            MusicManager.Instance.PlaySound(2);
         }
     }
 

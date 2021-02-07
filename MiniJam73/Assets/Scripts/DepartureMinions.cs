@@ -20,6 +20,7 @@ public class DepartureMinions : MonoBehaviour
             UIManager.Inctance.SetMessagePanel("You can only have two minions at the same time!");
             return;
         }
+
         for (int i = Dices.Length - 1; i >= 0; i--)
         {
             if(Dices[i].sprite == _sprite[1])
@@ -27,8 +28,7 @@ public class DepartureMinions : MonoBehaviour
                 Dices[i].sprite = _sprite[2];
             }
         }
-        GameManager.Instance.AddResource(GameManager.ResourceType.Minions, 1);
-        GameManager.Instance.AddResource(GameManager.ResourceType.PowerDise, _diceCount);
+        
         _getDiceCount = _diceCount;
         _diceCount = 0;
         if(_getDiceCount > 0)
@@ -46,6 +46,8 @@ public class DepartureMinions : MonoBehaviour
                 });
             entity._pathChunksParent = _pathChunksParent;
             UIManager.Inctance.EnablePanel(_map);
+            GameManager.Instance.AddResource(GameManager.ResourceType.Minions, 1);
+            GameManager.Instance.AddResource(GameManager.ResourceType.PowerDise, _diceCount);
         }
 
     }

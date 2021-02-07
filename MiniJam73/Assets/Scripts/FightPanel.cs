@@ -74,7 +74,15 @@ public class FightPanel : MonoBehaviour
 
     private void ApplyMarkerBonus()
     {
-
+        switch(_marker.BonusLoot)
+        {
+            case Marker.MarkerBonus.bonusFightDice:
+                GameManager.Instance.BonusFightDices++;
+                _resultText.text += "\nParmanent: +1 Combat Dice";
+                break;
+            default:
+                break;
+        }
     }
 
     private void InitFight()
@@ -128,7 +136,12 @@ public class FightPanel : MonoBehaviour
 
     private void SortEnemyDicesPull()
     {
-        _enemyBestDices = _enemyActiveDices;
+        _enemyBestDices.Clear();
+        foreach (var d in _enemyActiveDices)
+        {
+            _enemyBestDices.Add(d);
+        }
+        
         if (_enemyBestDices.Count > _playerActiveDices.Count)
         {
             _enemyBestDices.Sort(SortDices);
@@ -142,7 +155,7 @@ public class FightPanel : MonoBehaviour
         {
             case Marker.MarkerAbility.reroll1s:
                 _infoText.text = "Fight effect:\nenemy reroll 1's dices";
-                StartCoroutine(EnemyReroll1sDices(0.5f));
+                StartCoroutine(EnemyReroll1sDices(0.75f));
                 break;
             case Marker.MarkerAbility.none:
             default:
@@ -205,6 +218,7 @@ public class FightPanel : MonoBehaviour
         else
         {
             _resultText.text = $"Victory:\nCandles + {_reward}";
+            ApplyMarkerBonus();
         }
         OnFightEnd?.Invoke(_reward);
         Time.timeScale = 1f;
@@ -220,7 +234,6 @@ public class FightPanel : MonoBehaviour
             _minion.BackHome();
         }
         _randomDicePanel.SetActive(false);
-        ApplyMarkerBonus();
         StartCoroutine(ClosePanelWithDelay(2f));
     }
 
@@ -332,7 +345,7 @@ public class FightPanel : MonoBehaviour
         _enemyDice.Disable();
         readyToPlace = true;
 
-        if (_enemyActiveDices.Count == 0 || _playerActiveDices.Count == 0)
+        if (_enemyBestDices.Count == 0 || _playerActiveDices.Count == 0)
         {
             if(_enemyScore == _playerScore)
             {

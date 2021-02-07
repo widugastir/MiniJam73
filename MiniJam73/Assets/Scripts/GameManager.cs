@@ -47,8 +47,6 @@ public class GameManager : MonoBehaviour
     }
     public int GetResource (ResourceType resource)
     {
-        int amount = 0;
-        amount = _resources[resource];
-        return amount;
+        return _resources[resource];
     }
 }
