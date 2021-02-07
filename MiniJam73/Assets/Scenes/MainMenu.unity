@@ -670,14 +670,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You play as Dark God who was imprisoned inside the statue.
-
-
-
-    You
-    need to order your minions to capture cities. When your minion returns after
-    the successful attack it will give you the Candles of Dark Power. After capturing
-    as many as nine candles you will be liberated.'
+  m_text: Your dark power has accumulated over the years so has your hatred. And
+    now it's time to send your minions to nearby cities and kneel everyone to your
+    dark power. This world shall fall before you. All you have to do is free yourself
+    from the statue...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 93d261b4ef005944786d9567da731381, type: 2}
   m_sharedMaterial: {fileID: -8907798027300523569, guid: 93d261b4ef005944786d9567da731381, type: 2}
@@ -704,8 +700,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 28
-  m_fontSizeBase: 28
+  m_fontSize: 34
+  m_fontSizeBase: 34
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
