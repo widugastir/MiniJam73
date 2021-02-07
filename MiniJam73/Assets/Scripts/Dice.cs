@@ -8,6 +8,7 @@ public class Dice : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     [SerializeField] private Sprite _defaultSprite;
     [SerializeField] private bool _playerOwner = false;
     private Image _image;
+    private Animator _animator;
     [HideInInspector] public int Value = -1;
 
     public static System.Action<Dice, PointerEventData> OnDicePlacement;
@@ -15,6 +16,7 @@ public class Dice : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     public void Start()
     {
+        _animator = GetComponent<Animator>();
         _image = GetComponent<Image>();
         if (_playerOwner == false)
         {
@@ -44,10 +46,27 @@ public class Dice : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         }
     }
 
+    public void RollWithAnim()
+    {
+        if (Value == -1)
+        {
+            if (_animator == null)
+                _animator = GetComponent<Animator>();
+            Value = DiceController.RollD6();
+            _animator.SetTrigger("Roll");
+            OnDiceRoll?.Invoke(this);
+        }
+    }
+
+    public void OnMiddleRollAnimationEvent()
+    {
+        SetImageByValue();
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (_playerOwner == false || Value != -1) return;
-        Roll();
+        RollWithAnim();
         OnDicePlacement?.Invoke(this, eventData);
     }
 

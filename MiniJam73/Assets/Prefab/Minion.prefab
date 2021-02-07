@@ -89,9 +89,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentMarker: {fileID: 0}
-  MoveWaving: 30
-  _moveSpeed: 0.5
-  _pathChunkStep: 75
+  MoveWaving: 20
+  _moveSpeed: 0.3
+  _pathChunkStep: 45
   _pathChunkPrefab: {fileID: 9195533937374763799, guid: 95d7ef76085d74542980cdbe80e8620b, type: 3}
   _pathChunksParent: {fileID: 0}
   Selected: 0

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 187999658068911282}
   - component: {fileID: 3153702796274322568}
   - component: {fileID: 3835324705788282440}
+  - component: {fileID: 8594817041406672293}
   m_Layer: 0
   m_Name: Dice
   m_TagString: Untagged
@@ -123,8 +124,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3835324705788282440}
         m_TargetAssemblyTypeName: Dice, Assembly-CSharp
-        m_MethodName: Roll
-        m_Mode: 6
+        m_MethodName: RollWithAnim
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -155,3 +156,22 @@ MonoBehaviour:
   _defaultSprite: {fileID: -6168808069737563963, guid: 5937872bcd43d9148a7c47dce6e19ba0, type: 3}
   _playerOwner: 1
   Value: -1
+--- !u!95 &8594817041406672293
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7573591972646359863}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d28be3d645dbf7d41ad1b8b9a246dcc5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 2
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

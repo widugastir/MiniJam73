@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine;
@@ -22,6 +23,8 @@ public class FightPanel : MonoBehaviour
     [SerializeField] private Dice _randomDice;
     [SerializeField] private Text _randomDiceText1;
     [SerializeField] private Text _randomDiceText2;
+    [SerializeField] private Text _resultText;
+    [SerializeField] private Text _infoText;
 
     private List<Dice> _enemyActiveDices = new List<Dice>();
     private List<Dice> _enemyBestDices = new List<Dice>();
@@ -59,12 +62,30 @@ public class FightPanel : MonoBehaviour
     {
         if (marker.StarCounter == 0)
             return;
-        Time.timeScale = 0f;
+
         _marker = marker;
         _minion = entity;
-        _playerLayourtGroup.enabled = true;
+
+        InitFight();
+        InitPlayerDices();
+        InitEnemyDices();
+        ApplyEnemyAbilities();
+    }
+
+    private void ApplyMarkerBonus()
+    {
+
+    }
+
+    private void InitFight()
+    {
+        _enemyCubePos.gameObject.SetActive(true);
+        _playerCubePos.gameObject.SetActive(true);
         _fightPanel.SetActive(true);
-        _reward = marker.StarCounter;
+        _resultText.text = "";
+        Time.timeScale = 0f;
+        _playerLayourtGroup.enabled = true;
+        _reward = _marker.StarCounter;
         readyToPlace = true;
         _randomDice.Disable(false);
         _playerScore = 0;
@@ -72,32 +93,41 @@ public class FightPanel : MonoBehaviour
         _enemyBestDices.Clear();
         _playerVictoryPoints.text = "" + _playerScore;
         _enemyVictoryPoints.text = "" + _enemyScore;
+    }
 
-        //Init player dices
+    private void InitPlayerDices()
+    {
         _playerActiveDices.Clear();
         for (int i = 0; i < _playerDices.Count; i++)
         {
             _playerDices[i].Disable();
             _playerDices[i].gameObject.SetActive(false);
-            if (i < entity.DiceCount * 2 + 1)
+            if (i < _minion.DiceCount * 2 + GameManager.Instance.BonusFightDices)
             {
                 _playerDices[i].gameObject.SetActive(true);
                 _playerActiveDices.Add(_playerDices[i]);
             }
         }
+    }
 
-        //Init enemy dices
+    private void InitEnemyDices()
+    {
         _enemyActiveDices.Clear();
         for (int i = 0; i < _enemyDices.Count; i++)
         {
             _enemyDices[i].gameObject.SetActive(false);
-            if (i < marker.StarCounter * 2)
+            if (i < _marker.StarCounter * 2)
             {
                 _enemyDices[i].gameObject.SetActive(true);
                 _enemyDices[i].Roll();
                 _enemyActiveDices.Add(_enemyDices[i]);
             }
         }
+        SortEnemyDicesPull();
+    }
+
+    private void SortEnemyDicesPull()
+    {
         _enemyBestDices = _enemyActiveDices;
         if (_enemyBestDices.Count > _playerActiveDices.Count)
         {
@@ -106,11 +136,46 @@ public class FightPanel : MonoBehaviour
         }
     }
 
+    private void ApplyEnemyAbilities()
+    {
+        switch(_marker.Ability)
+        {
+            case Marker.MarkerAbility.reroll1s:
+                _infoText.text = "Fight effect:\nenemy reroll 1's dices";
+                StartCoroutine(EnemyReroll1sDices(0.5f));
+                break;
+            case Marker.MarkerAbility.none:
+            default:
+            _infoText.text = "";
+                break;
+        }
+    }
+
+    private IEnumerator EnemyReroll1sDices(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        foreach (Dice dice in _enemyActiveDices)
+        {
+            if (dice.Value == 1)
+            {
+                dice.Value = -1;
+                dice.RollWithAnim();
+            }
+        }
+        SortEnemyDicesPull();
+    }
+
     public void RollAllDices()
+    {
+        StartCoroutine(RollDiceWithDelay());
+    }
+
+    private IEnumerator RollDiceWithDelay()
     {
         for (int i = 0; i < _playerActiveDices.Count; i++)
         {
-            _playerActiveDices[i].Roll();
+            _playerActiveDices[i].RollWithAnim();
+            yield return new WaitForSecondsRealtime(Random.Range(0.1f,0.3f));
         }
     }
 
@@ -129,9 +194,17 @@ public class FightPanel : MonoBehaviour
 
     public void EndFight()
     {
-        _fightPanel.SetActive(false);
+        _enemyCubePos.gameObject.SetActive(false);
+        _playerCubePos.gameObject.SetActive(false);
         if (_playerScore < _enemyScore)
+        {
             _reward = 0;
+            _resultText.text = "Lose";
+        }
+        else
+        {
+            _resultText.text = $"Vectory:\nCandles + {_reward}";
+        }
         OnFightEnd?.Invoke(_reward);
         Time.timeScale = 1f;
         if(_reward > 0)
@@ -146,6 +219,14 @@ public class FightPanel : MonoBehaviour
             _minion.BackHome();
         }
         _randomDicePanel.SetActive(false);
+        ApplyMarkerBonus();
+        StartCoroutine(ClosePanelWithDelay(2f));
+    }
+
+    private IEnumerator ClosePanelWithDelay(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        _fightPanel.SetActive(false);
     }
 
     private void CompareDices()
@@ -157,10 +238,6 @@ public class FightPanel : MonoBehaviour
         else if(_playerDice.Value < _enemyDice.Value)
         {
             _enemyScore++;
-        }
-        else // equil
-        {
-
         }
         _playerVictoryPoints.text = "" + _playerScore;
         _enemyVictoryPoints.text = "" + _enemyScore;
@@ -221,7 +298,7 @@ public class FightPanel : MonoBehaviour
         }
     }
 
-    private System.Collections.IEnumerator LateEndFight()
+    private IEnumerator LateEndFight()
     {
         yield return new WaitForSecondsRealtime(3f);
         EndFight();
@@ -247,7 +324,7 @@ public class FightPanel : MonoBehaviour
         _randomDicePanel.SetActive(true);
     }
 
-    private System.Collections.IEnumerator HideDices()
+    private IEnumerator HideDices()
     {
         yield return new WaitForSecondsRealtime(1f);
         _playerDice.Disable();

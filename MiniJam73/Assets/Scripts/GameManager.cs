@@ -6,7 +6,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public Action<ResourceType, int> OnResourceChange;
-    private bool status = true;
+
+    #region Player achivements
+    public int BonusFightDices = 0;
+    #endregion
 
     public enum ResourceType
     {
