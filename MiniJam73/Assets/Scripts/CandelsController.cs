@@ -39,11 +39,11 @@ public class CandelsController : MonoBehaviour
 
     private void ChekcCurrentResource(GameManager.ResourceType resourceType, int amount)
     {
-        if(GameManager.Instance.GetResource(GameManager.ResourceType.Candles) < 10 
+        if(GameManager.Instance.GetResource(GameManager.ResourceType.Candles) < 9 
         && GameManager.Instance.GetResource(GameManager.ResourceType.Minions) == 0 
-        && GameManager.Instance.GetResource(GameManager.ResourceType.PowerDise) == 10)
+        && GameManager.Instance.GetResource(GameManager.ResourceType.PowerDise) == 12)
             _failPanel.SetActive(true);
-        if(GameManager.Instance.GetResource(GameManager.ResourceType.Candles) == 10)
+        if(GameManager.Instance.GetResource(GameManager.ResourceType.Candles) == 9)
             _winPanel.SetActive(true);
         if(GameManager.ResourceType.Candles == resourceType) 
             ChangeCountCandels(GameManager.Instance.GetResource(GameManager.ResourceType.Candles));

@@ -11,6 +11,7 @@ public class DepartureMinions : MonoBehaviour
     [SerializeField] private GameObject _areaSpawn;
     [SerializeField] private Transform _pathChunksParent;
     [SerializeField] private Image [] Dices;
+    [SerializeField] private Sprite [] _sprite;
 
     public void Departure()
     {
@@ -21,9 +22,9 @@ public class DepartureMinions : MonoBehaviour
         }
         for (int i = Dices.Length - 1; i >= 0; i--)
         {
-            if(Dices[i].color == new Color(0.3f, 0.3f, 0.3f))
+            if(Dices[i].sprite == _sprite[1])
             {
-                Dices[i].color = new Color(0f, 0f, 0f);
+                Dices[i].sprite = _sprite[2];
             }
         }
         GameManager.Instance.AddResource(GameManager.ResourceType.Minions, 1);
@@ -55,21 +56,21 @@ public class DepartureMinions : MonoBehaviour
             _diceCount += 1;
             for (int i = 0; i < Dices.Length; i++)
             {
-                if(Dices[i].color == new Color(0.9f, 0.9f, 0.9f))
+                if(Dices[i].sprite == _sprite[0])
                 {
-                    Dices[i].color = new Color(0.3f, 0.3f, 0.3f);
+                    Dices[i].sprite = _sprite[1];
                     break;
                 }
             }
         }
         else if(!get)
         {
-            _diceCount -= 1;
+            if(_diceCount > 0) _diceCount -= 1;
             for (int i = Dices.Length - 1; i >= 0; i--)
             {
-                if(Dices[i].color == new Color(0.3f, 0.3f, 0.3f))
+                if(Dices[i].sprite == _sprite[1])
                 {
-                    Dices[i].color = new Color(0.9f, 0.9f, 0.9f);
+                    Dices[i].sprite = _sprite[0];
                     break;
                 }
             }
