@@ -8,7 +8,9 @@ public class UIManager : MonoBehaviour
     public static UIManager Inctance;
     [SerializeField] private GameObject _initialPanel;
     [SerializeField] private GameObject _messagePanel;
+    [SerializeField] private GameObject _exitPanel;
     [SerializeField] private TextMeshProUGUI _messageText;
+    
 
     private GameObject _lastPanel;
 
@@ -25,6 +27,13 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         EnablePanel(_initialPanel);
+    }
+    public void ExitPanel (bool trigger)
+    {
+        if(!trigger) 
+            _exitPanel.SetActive(true);
+        else
+            _exitPanel.SetActive(false);
     }
 
     public void SetMessagePanel(string text)
