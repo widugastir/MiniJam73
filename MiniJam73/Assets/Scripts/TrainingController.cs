@@ -13,7 +13,7 @@ public class TrainingController : MonoBehaviour
     {
         _baseMapPosition = _map.transform.position;
         if (PlayerPrefs.GetInt("Training", 0) != 1)
-            Invoke(nameof(SetUnsetActivePanel), 1f);
+            SetUnsetActivePanel(0);
     }
 
     public void SetUnsetActivePanel(int index)
@@ -34,11 +34,6 @@ public class TrainingController : MonoBehaviour
             if(PlayerPrefs.GetInt("Training") != 1) 
                 PlayerPrefs.SetInt("Training", 1);
         }
-    }
-
-    public void SetUnsetActivePanel()
-    {
-        SetUnsetActivePanel(0);
     }
 
     public void DeleteALLKey ()

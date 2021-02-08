@@ -1,13 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Inctance;
     [SerializeField] private GameObject _initialPanel;
     [SerializeField] private GameObject _messagePanel;
-    [SerializeField] private Text _messageText;
+    [SerializeField] private TextMeshProUGUI _messageText;
 
     private GameObject _lastPanel;
 
